@@ -259,8 +259,8 @@ async function forgetPassword1(req, res) {
                 from: process.env.MAIL_SENDER,
                 to: data.email,
                 subject: `OTP for Password Reset : Team ${process.env.SITE_NAME}`,
-                text: `
-                       <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+                html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
                         <h2 style="text-align: center; color: #333;">Password Reset Request</h2>
                         <p>Hello <strong>${data.name}</strong>,</p>
                         <p>You have requested a password reset.</p>
@@ -272,8 +272,7 @@ async function forgetPassword1(req, res) {
                         <p>Regards,</p>
                         <p><strong>Team ${process.env.SITE_NAME}</strong></p>
                     </div>
-
-                    `
+                `
             }, (error) => {
                 if (error)
                     console.log(error)
