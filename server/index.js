@@ -1,39 +1,37 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+const express = require("express")
+const cors = require("cors")
+require("dotenv").config()
 const path = require("path");
 
-require("./db_connect");
+require("./db_connect")
 
-const Router = require("./routes/index");
-const app = express();
+const Router = require("./routes/index")
+const app = express()
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8000', 'http://localhost:4000'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS Error, You Are not authenticated to access this API'));
+var whitelist = ['http://localhost:3000', 'http://localhost:8000', 'http://localhost:4000'] 
+var corsOptions = {
+    origin: function (origin, callback) {
+        // console.log("Origin",origin)
+        if (whitelist.includes(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('CORS Error, You Are not authenciated to access this api'))
+        }
     }
-  }
-};
-app.use(cors(corsOptions));
+}
+app.use(cors(corsOptions))
 
-app.use(express.json());
-app.use("/public", express.static("public"));
-app.use("/api", Router);
+app.use(express.json())                     //used to parse incomming json data
+app.use("/public", express.static("public"))//used to server public files like uploaded images
+app.use("/api",Router)
 
-// ✅ Serve React Client (Main User Side) at "/"
-app.use("/", express.static(path.join(__dirname, "client/build")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
+// Serve client build at root "/"
+app.use("", express.static(path.join(__dirname, "client/build")));
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running on port Server is Running at http://localhost:${port}`);
 });
