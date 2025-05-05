@@ -2,7 +2,7 @@ const User = require("../models/User")
 const fs = require("fs")
 const mailer = require("../mailer/index")
 const passwordValidator = require('password-validator')
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
 
 const schema = new passwordValidator();
