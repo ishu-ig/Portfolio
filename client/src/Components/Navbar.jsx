@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
 
 
-export default function Navbar() {
+export default function Navbar({ title }) {
     const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
-        <header id="header" className={`header sticky-top mt-5 mx-4 animated-navbar navbar-light}`}style={{ backgroundColor: "var(--bg-color)", color: "var(--text-color)" }} >
-            <nav className="navbar navbar-expand-lg container shadow px-3 py-3" style={{borderRadius:"50px"}} >
+        <header id="header" className={`header sticky-top mt-5 mx-4 animated-navbar navbar-light}`} style={{ backgroundColor: "var(--bg-color)", color: "var(--text-color)" }} >
+            <nav className="navbar navbar-expand-lg container shadow px-3 py-3" style={{ borderRadius: "50px" }} >
                 {/* Dark Mode Button on Small Screens */}
                 <button className="btn btn-sm btn-outline-secondary me-3 d-lg-none" onClick={toggleTheme}>
                     {theme === "light" ? <i className="bi bi-moon"></i> : <i className="bi bi-sun"></i>}
                 </button>
 
                 {/* Brand Name */}
-                <Link to="/" className={`navbar-brand fw-bold fs-4 ms-lg-3`} style={{color: "var(--text-color)" }}>
+                <Link to="/" className={`navbar-brand fw-bold fs-4 ms-lg-3`} style={{ color: "var(--text-color)" }}>
                     Portfolio
                 </Link>
 
@@ -28,7 +28,7 @@ export default function Navbar() {
                     aria-controls="navbarNav"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
-                    style={{color: "var(--text-color)",borderColor:" var(--border-color)",border:"20px" }}
+                    style={{ color: "var(--text-color)", borderColor: " var(--border-color)", border: "20px" }}
                 >
                     <i className="bi bi-list"></i>
                 </button>
@@ -36,7 +36,12 @@ export default function Navbar() {
                 {/* Navbar Links */}
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
-                        {["Home", "About", "Resume", "Portfolio","Certificate", "Services", "Contact"].map((item, index) => (
+                        <li className="nav-item">
+                            <a href="/" className={`nav-link `}>
+                                Home
+                            </a>
+                        </li>
+                        {["About", "Resume", "Portfolio", "Certificate", "Services", "Contact"].map((item, index) => (
                             <li className="nav-item" key={index}>
                                 <a href={`#${item.toLowerCase()}`} className={`nav-link `}>
                                     {item}
@@ -69,15 +74,15 @@ export default function Navbar() {
 
                     {/* Social Media Links - Hidden on Small Screens */}
                     <div className="d-none d-lg-inline-block ms-4 fs-5">
-                        <Link to="#" className="me-3"><i className="bi bi-twitter"></i></Link>
+                        <Link to="https://github.com/ishu-ig" className="me-3"><i className="bi bi-github"></i></Link>
                         <Link to="#" className="me-3"><i className="bi bi-facebook"></i></Link>
-                        <Link to="#" className="me-3"><i className="bi bi-instagram"></i></Link>
-                        <Link to="#" className="me-3"><i className="bi bi-linkedin"></i></Link>
+                        <Link to="https://www.instagram.com/_ishaan_12?igsh=MW9kNHhmaXFtbG0zeg==" className="me-3"><i className="bi bi-instagram"></i></Link>
+                        <Link to="https://www.linkedin.com/in/ishaan-gupta-2a0568242" className="me-3"><i className="bi bi-linkedin"></i></Link>
                     </div>
 
                     {/* Dark Mode Button - Visible on Large Screens */}
                     <button className="btn btn-sm btn-outline-secondary ms-3 d-none d-lg-inline-block" onClick={toggleTheme}>
-                    {theme === "light" ? <i className="bi bi-moon"></i> : <i className="bi bi-sun"></i>}
+                        {theme === "light" ? <i className="bi bi-moon"></i> : <i className="bi bi-sun"></i>}
                     </button>
                 </div>
             </nav>

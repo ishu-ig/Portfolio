@@ -43,21 +43,21 @@ export default function About() {
                                     <div className="col-6">
                                         <div className="info-item">
                                             <p><strong>Name:</strong></p>
-                                            <p>Eliot Johnson</p>
+                                            <p>Ishaan Gupta</p>
                                         </div>
                                         <div className="info-item">
                                             <p><strong>Phone:</strong></p>
-                                            <p>+123 456 7890</p>
+                                            <p>+91-8218635344</p>
                                         </div>
                                         <div className="info-item">
                                             <p><strong>Age:</strong></p>
-                                            <p>26 Years</p>
+                                            <p>23 Years</p>
                                         </div>
                                     </div>
                                     <div className="col-6">
                                         <div className="info-item">
                                             <p><strong>Email:</strong></p>
-                                            <p>email@example.com</p>
+                                            <p>ishaanguptacse@gmail.com</p>
                                         </div>
                                         <div className="info-item">
                                             <p><strong>Occupation:</strong></p>
@@ -65,7 +65,7 @@ export default function About() {
                                         </div>
                                         <div className="info-item">
                                             <p><strong>Nationality:</strong></p>
-                                            <p>Global Citizen</p>
+                                            <p>Indian</p>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@ export default function About() {
                             <div className="signature mt-4">
                                 <img src="/img/misc/signature-1.webp" alt="Signature" className="signature-img" style={{ color: "var(--text-color)" }} />
                                 <div className="signature-info">
-                                    <h4>Eliot Johnson</h4>
+                                    <h4>Ishaan Gupta</h4>
                                     <p>Full Stack Developer & Programmer</p>
                                 </div>
                             </div>

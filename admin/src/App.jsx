@@ -67,7 +67,7 @@ export default function App() {
     }, []);
 
     return (
-        <BrowserRouter>
+        <BrowserRouter >
             <MainContent isSidebarExpanded={isSidebarExpanded} toggleSidebar={() => setIsSidebarExpanded(!isSidebarExpanded)} checkLoginStatus={checkLoginStatus} />
         </BrowserRouter>
     );

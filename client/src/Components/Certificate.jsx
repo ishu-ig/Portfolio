@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCertificate } from '../Redux/ActionCreartors/CertificateActionCreators';
+import { Link } from "react-router-dom";
 
 const certificates = [
     {
@@ -55,7 +56,9 @@ export default function Certificates() {
                 {CertificateStateData.map((cert) => (
                     <div key={cert._id} className="col-lg-4 col-md-6 col-sm-8 mb-4" >
                         <div className="card certificate-card shadow-sm" >
-                            <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${cert.pic}`} className="card-img-top" height={100} style={{ backgroundColor: "var(--bg-color)" }} alt={cert.title} />
+                            <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${cert.pic}`} target='_blank' rel='noreferrer'>
+                                <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${cert.pic}`} className="card-img-top" height={100} style={{ backgroundColor: "var(--bg-color)" }} alt={cert.title} />
+                            </Link>
                             <div className="card-body text-center" style={{ backgroundColor: "var(--bg-color)" }}>
                                 <h5 className="card-title">{cert.name}</h5>
                                 <p className="card-text">{cert.issuedBy}</p>

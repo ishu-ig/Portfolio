@@ -67,8 +67,6 @@ export default function formValidator(e) {
         case "message":
             if (!value || value.length === 0)
                 return name + " Field is Mendatory"
-            else if (value.length < 50)
-                return name + " Field Length Must Be More Than 50 Characters"
             else
                 return ""
 

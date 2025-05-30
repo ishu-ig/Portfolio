@@ -42,6 +42,7 @@ export default function ContactUs() {
         let error = Object.values(errorMessage).find((x) => x !== "");
         if (error) {
             setShow(true);
+            console.log(error)
         } else {
             dispatch(createContactUs({ ...data, active: true, date: new Date() }));
             setData({
