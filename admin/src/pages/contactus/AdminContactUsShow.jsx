@@ -83,8 +83,8 @@ export default function AdminContactUsShow() {
                             <td colSpan={2}>
                                 {
                                     data.active ?
-                                        <button className='btn btn-primary w-100' onClick={updateRecord}>Update Status</button> :
-                                        <button className='btn btn-danger w-100' onClick={deleteRecord}>Delete</button>
+                                        <button className='btn btn-primary w-100 text-light' onClick={updateRecord}>Update Status</button> :
+                                        <button className='btn btn-danger w-100 text-light' onClick={deleteRecord}>Delete</button>
                                 }
                             </td>
                         </tr>

@@ -7,8 +7,8 @@ export default function Portfolio() {
     let PortfolioStateData = useSelector(state => state.PortfolioStateData)
     let dispatch = useDispatch()
 
-    useEffect(()=>{
-        (()=>{
+    useEffect(() => {
+        (() => {
             dispatch(getPortfolio())
         })()
     })
@@ -42,7 +42,10 @@ export default function Portfolio() {
                                 <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} className="card-img-top img-fluid" alt={item.title} loading="lazy" />
                                 <div className="portfolio-overlay">
                                     <div className="portfolio-actions">
-                                        <Link href={item.img} className="glightbox preview-link" data-gallery="portfolio-gallery"><i className="bi bi-eye"></i></Link>
+                                        <a href={item.liveUrl} target="_blank" rel="noopener noreferrer" className="glightbox preview-link">
+                                            <i className="bi bi-eye"></i>
+                                        </a>
+
                                         <Link to={`projectDetail/${item._id}`} className="details-link"><i className="bi bi-arrow-right"></i></Link>
                                     </div>
                                 </div>

@@ -21,7 +21,7 @@ export default function About() {
                     {/* Profile Image */}
                     <div className="col-lg-6 text-center" data-aos="fade-right">
                         <div className="about-image">
-                            <img src="/img/profile/profile-square-2.webp" alt="Profile" className="img-fluid rounded-4 shadow-lg" />
+                            <img src="/img/profile/Ishaan_ig.png"  alt="Profile" className="img-fluid rounded-4 shadow-lg" />
                         </div>
                     </div>
 

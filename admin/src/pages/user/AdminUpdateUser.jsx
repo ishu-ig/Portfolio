@@ -140,7 +140,7 @@ export default function AdminUpdateUser() {
                         </div>
 
                         <div className="mb-3">
-                            <button type="submit" className='btn btn-primary w-100'>Update</button>
+                            <button type="submit" className='btn btn-primary w-100 text-light'>Update</button>
                         </div>
                     </form>
                 </div>

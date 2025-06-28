@@ -143,7 +143,7 @@ export default function AdminUpdateExperience() {
                         </div>
 
                         <div className="mb-3">
-                            <button type="submit" className='btn btn-primary w-100 -text-light'>Create</button>
+                            <button type="submit" className='btn btn-primary w-100 text-light'>Update</button>
                         </div>
                     </form>
 

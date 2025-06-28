@@ -153,7 +153,7 @@ export default function AdminCreateUser() {
                         </div>
 
                         <div className="mb-3">
-                            <button type="submit" className='btn btn-primary w-100'>Create</button>
+                            <button type="submit" className='btn btn-primary w-100 text-light'>Create</button>
                         </div>
                     </form>
                 </div>

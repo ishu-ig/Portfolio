@@ -62,7 +62,7 @@ export default function AdminUser() {
     return (
         <>
             <div>
-                <h5 className='bg-primary text-light text-center p-2'>User {localStorage.getItem("role") === "Super Admin" ? <Link to="/admin/user/create"><i className='fa fa-plus text-light float-end'></i></Link> : null}</h5>
+                <h5 className='bg-primary text-light text-center p-2'>User <Link to="/user/create"><i className='fa fa-plus text-light float-end'></i></Link></h5>
                 <div className="table-responsive">
                     <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
                         <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
@@ -94,7 +94,7 @@ export default function AdminUser() {
                                         <td className={`${item?.active ? 'text-success' : 'text-danger'}`} onClick={() => updateRecord(item?.id)} style={{ cursor: "pointer" }}>{item?.active ? "Yes" : "No"}</td>
                                         {/* <td>{localStorage.getItem("role") === "Super Admin" && item?.role !== "Buyer" ? <Link to={`/admin/user/update/${item?.id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link> : null}</td>
                                                 <td>{localStorage.getItem("role") === "Super Admin" ? <button className='btn btn-danger' onClick={() => deleteRecord(item?.id)}><i className='fa fa-trash fs-4'></i></button> : null}</td> */}
-                                        <td><Link to={`/admin/user/update/${item?._id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link></td>
+                                        <td><Link to={`/user/update/${item?._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
                                         <td><button className='btn btn-danger' onClick={() => deleteRecord(item?._id)}><i className='fa fa-trash fs-4'></i></button></td>
                                     </tr>
                                 })

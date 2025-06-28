@@ -41,7 +41,7 @@ export default function Navbar({ title }) {
                                 Home
                             </a>
                         </li>
-                        {["About", "Resume", "Portfolio", "Certificate", "Services", "Contact"].map((item, index) => (
+                        {["About", "Resume", "Skills","Certificate", "Portfolio", "Testimonials", "Services", "Contact"].map((item, index) => (
                             <li className="nav-item" key={index}>
                                 <a href={`#${item.toLowerCase()}`} className={`nav-link `}>
                                     {item}
@@ -74,10 +74,10 @@ export default function Navbar({ title }) {
 
                     {/* Social Media Links - Hidden on Small Screens */}
                     <div className="d-none d-lg-inline-block ms-4 fs-5">
-                        <Link to="https://github.com/ishu-ig" className="me-3"><i className="bi bi-github"></i></Link>
-                        <Link to="#" className="me-3"><i className="bi bi-facebook"></i></Link>
-                        <Link to="https://www.instagram.com/_ishaan_12?igsh=MW9kNHhmaXFtbG0zeg==" className="me-3"><i className="bi bi-instagram"></i></Link>
-                        <Link to="https://www.linkedin.com/in/ishaan-gupta-2a0568242" className="me-3"><i className="bi bi-linkedin"></i></Link>
+                        <Link to="https://github.com/ishu-ig" target="_blank" className="me-3"><i className="bi bi-github"></i></Link>
+                        <Link to="#" target="_blank" className="me-3"><i className="bi bi-facebook"></i></Link>
+                        <Link to="https://www.instagram.com/_ishaan_12?igsh=MW9kNHhmaXFtbG0zeg==" target="_blank" className="me-3"><i className="bi bi-instagram"></i></Link>
+                        <Link to="https://www.linkedin.com/in/ishaan-gupta-2a0568242" target="_blank" className="me-3"><i className="bi bi-linkedin"></i></Link>
                     </div>
 
                     {/* Dark Mode Button - Visible on Large Screens */}
