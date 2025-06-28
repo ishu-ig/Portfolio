@@ -7,7 +7,7 @@ require("./db_connect");                // ✅ Connect to DB
 const app = express();
 const Router = require("./routes/index");
 
-const whitelist = ['http://localhost:4000', 'http://localhost:8000', 'http://localhost:3000'];
+const whitelist = ['http://localhost:4000', 'http://localhost:8000', 'http://localhost:3000','https://portfolio-g2rt.onrender.com'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whitelist.includes(origin)) {
