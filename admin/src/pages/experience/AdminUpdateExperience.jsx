@@ -135,7 +135,7 @@ export default function AdminUpdateExperience() {
 
                             <div className="col-md-6 mb-3">
                                 <label>Active*</label>
-                                <select name="active" onChange={getInputData} className='form-select border-3 border-primary'>
+                                <select name="active" value={data.active ? "1" : "0"} onChange={getInputData} className='form-select border-3 border-primary'>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>

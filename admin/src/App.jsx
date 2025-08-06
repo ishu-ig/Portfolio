@@ -45,7 +45,7 @@ import AdminUpdateCertificate from './pages/certificate/AdminUpdateCertificate';
 import AdminService from './pages/service/AdminService';
 import AdminCreateService from './pages/service/AdminCreateService';
 import AdminUpdateService from './pages/service/AdminUpdateService';
-import AdminPortfolio from './pages/portfolio/AdminProduct';
+import AdminPortfolio from './pages/portfolio/AdminPortfolio';
 import AdminCreatePortfolio from './pages/portfolio/AdminCreatePortfolio';
 import AdminUpdatePortfolio from './pages/portfolio/AdminUpdatePortfolio';
 

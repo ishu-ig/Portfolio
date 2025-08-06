@@ -122,8 +122,8 @@ export default function AdminUpdateEducation() {
                             </div>
 
                             <div className="col-md-6 mb-3">
-                                <label>Active*</label>
-                                <select name="active" onChange={getInputData} className='form-select border-3 border-primary'>
+                                <label>Active*</label >
+                                <select name="active" value={data.active ? "1" : "0"} onChange={getInputData} className='form-select border-3 border-primary'>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
                                 </select>
@@ -131,7 +131,7 @@ export default function AdminUpdateEducation() {
                         </div>
 
                         <div className="mb-3">
-                            <button type="submit" className='btn btn-primary w-100 -text-light'>Create</button>
+                            <button type="submit" className='btn btn-primary w-100 -text-light'>Update</button>
                         </div>
                     </form>
 

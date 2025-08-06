@@ -154,7 +154,7 @@ async function updateRecord(req, res) {
         let errorMessage = {}
         error.keyValue?.username ? errorMessage.username = "User With This User Name Already Exist" : null
         error.keyValue?.email ? errorMessage.email = "User With This Email Already Exist" : null
-
+        console.log(error)
         if (Object.values(errorMessage).length === 0) {
             res.status(500).send({
                 result: "Fail",

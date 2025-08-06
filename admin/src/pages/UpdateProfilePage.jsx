@@ -56,6 +56,7 @@ export default function UpdateProfilePage() {
                 formData.append("city", data.city);
                 formData.append("state", data.state);
                 formData.append("pic", data.pic);
+                console.log(formData)
 
                 let response = await fetch(
                     `${process.env.REACT_APP_BACKEND_SERVER}/api/user/${localStorage.getItem("userid")}`,
@@ -76,6 +77,7 @@ export default function UpdateProfilePage() {
                     alert("Something Went Wrong");
                 }
             } catch (error) {
+                console.log(error)
                 alert("Internal Server Error");
             }
         }
@@ -204,12 +206,12 @@ export default function UpdateProfilePage() {
 
                         <div className="col-md-6 mb-3">
                             <label className="fw-bold">Upload Profile Picture</label>
-                            <input type="file" name="pic" onChange={getInputData} className="form-control border-primary" />
+                            <input type="file" name="pic"  onChange={getInputData} className="form-control border-primary" />
                         </div>
                     </div>
 
                     <div className="mt-3">
-                        <button type="submit" className="btn btn-primary w-100 py-2">Update Profile</button>
+                        <button type="submit" className="btn btn-primary w-100 py-2 text-light">Update Profile</button>
                     </div>
                 </form>
             </div>
