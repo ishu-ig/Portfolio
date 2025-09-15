@@ -377,7 +377,7 @@ const ChatbotUI = () => {
                         <div className="d-flex flex-wrap">
                             {Object.keys(resume.projects).map((p, i) => (
                                 <button key={i} className="btn btn-sm btn-outline-success rounded-pill me-2 mb-2"
-                                    style={{ fontSize: "0.75rem", padding: "3px 8px" }}
+                                    style={{ fontSize: "0.9rem", padding: "3px 8px" }}
                                     onClick={() => { setInput(p); setTimeout(handleSend, 100); }}>
                                     {p}
                                 </button>
@@ -393,7 +393,7 @@ const ChatbotUI = () => {
                         <div className="d-flex flex-wrap">
                             {resume.services?.map((s, i) => (
                                 <button key={i} className="btn btn-sm btn-outline-warning rounded-pill me-2 mb-2"
-                                    style={{ fontSize: "0.75rem", padding: "3px 8px" }}
+                                    style={{ fontSize: "0.9rem", padding: "3px 8px" }}
                                     onClick={() => { setInput(s.name); setTimeout(handleSend, 100); }}>
                                     {s.name}
                                 </button>
