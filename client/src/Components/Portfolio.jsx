@@ -36,7 +36,7 @@ export default function Portfolio() {
 
                 {/* Portfolio Grid */}
                 <div className="row g-4 justify-content-center">
-                    {PortfolioStateData.map((item, index) => (
+                    {PortfolioStateData.filter(x=>x.active).map((item, index) => (
                         <div key={index} className={`col-lg-4 col-md-6 portfolio-item ${item.filter}`}>
                             <div className="card portfolio-card">
                                 <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} className="card-img-top img-fluid" alt={item.title} loading="lazy" />

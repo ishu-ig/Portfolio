@@ -64,7 +64,7 @@ export default function HeroSection() {
                         {/* CTA Buttons */}
                         <div className="d-flex gap-3 justify-content-center justify-content-lg-start mt-4">
                             <a href="#portfolio" className="btn btn-primary btn-lg">View My Work</a>
-                            <a href="file/Ishaan CV.pdf" className="btn btn-outline-dark btn-lg px-5">Resume</a>
+                            <a href="file/Ishaan CV.pdf" className="btn btn-outline-dark btn-lg px-5" target="_blank">Resume</a>
                         </div>
 
                         {/* Stats Section */}

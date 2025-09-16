@@ -26,7 +26,7 @@ export default function Service() {
         </p>
 
         <div className="row g-4 mt-5 justify-content-center">
-          {ServiceStateData.map((service) => (
+          {ServiceStateData.filter(x=>x.active).map((service) => (
             <div className="col-md-6 col-lg-4" key={service._id}>
               <div className="service-card" style={{ backgroundColor: "var(--bg-color)", color: "var(--text-color)" }}>
                 <div className="service-icon">

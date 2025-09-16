@@ -52,8 +52,8 @@ export default function Navbar({ title }) {
                             </li>
                             {[
                                 "About",
-                                "Resume",
                                 "Skills",
+                                "Resume",
                                 "Certificate",
                                 "Portfolio",
                                 "Testimonials",

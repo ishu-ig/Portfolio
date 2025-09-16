@@ -23,7 +23,7 @@ export default function Skills() {
                 <p className="section-subtitle" style={{ color: "var(--text-color)" }}>Enhancing my expertise through continuous learning and innovation.</p>
 
                 <div className="row g-4 skills-container" style={{ backgroundColor: "var(--bg-color)", color: "var(--text-color)" }}>
-                    {SkillStateData.map((skill) => (
+                    {SkillStateData.filter(x=>x.active).map((skill) => (
                         <div key={skill._id} className="col-md-6 col-lg-3" >
                             <div className="skill-card">
                                 <h3 className="skill-name" style={{ color: "var(--text-color)" }}>{skill.name}</h3>

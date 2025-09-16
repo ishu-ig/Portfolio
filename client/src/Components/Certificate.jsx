@@ -53,7 +53,7 @@ export default function Certificates() {
                 </div>
             </div>
             <div className="row justify-content-center" >
-                {CertificateStateData.map((cert) => (
+                {CertificateStateData.filter(x=>x.active).map((cert) => (
                     <div key={cert._id} className="col-lg-4 col-md-6 col-sm-8 mb-4" >
                         <div className="card certificate-card shadow-sm" >
                             <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${cert.pic}`} target='_blank' rel='noreferrer'>

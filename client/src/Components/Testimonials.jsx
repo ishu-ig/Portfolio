@@ -97,7 +97,7 @@ export default function Testimonial() {
             pagination={{ clickable: true }}
             className="swiper-container"
           >
-            {testimonials.map((testimonial) => (
+            {testimonials.filter(x=>x.active).map((testimonial) => (
               <SwiperSlide key={testimonial._id}>
                 <div className="testimonial-card">
                   <div className="testimonial-content">

@@ -41,7 +41,7 @@ export default function Resume() {
                         <p className="lead" style={{ color: "var(--text-color)" }}>Highlights of my professional journey and contributions.</p>
 
                         <div className="timeline">
-                            {ExperienceStateData.map((item, index) => (
+                            {ExperienceStateData.filter(x=>x.active).map((item, index) => (
                                 <div key={item._id} className="timeline-item" data-aos="fade-up" data-aos-delay={item.delay}>
                                     <div className="timeline-left">
                                         <h4 className="company">{item.companyName}</h4>
@@ -63,7 +63,7 @@ export default function Resume() {
                         <p className="lead" style={{ color: "var(--text-color)" }}>Academic qualifications and learning journey.</p>
 
                         <div className="timeline">
-                            {EducationStateData.map((item, index) => (
+                            {EducationStateData.filter(x=>x.active).map((item, index) => (
                                 <div key={index} className="timeline-item" data-aos="fade-up" data-aos-delay={item.delay}>
                                     <div className="timeline-left">
                                         <h4 className="company">{item.instituteName}</h4>
