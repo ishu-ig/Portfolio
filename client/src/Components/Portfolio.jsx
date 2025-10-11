@@ -27,7 +27,7 @@ export default function Portfolio() {
             <div className="container" data-aos="fade-up" data-aos-delay="100">
                 {/* Portfolio Filters */}
                 <div className="portfolio-filters text-center mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <button className="btn filter-active" data-filter="*">All</button>
+                    <button className="btn px-5 filter-active" data-filter="*">All</button>
                     <button className="btn" data-filter=".filter-web">Web Design</button>
                     <button className="btn" data-filter=".filter-graphics">Graphics</button>
                     <button className="btn" data-filter=".filter-motion">Motion</button>

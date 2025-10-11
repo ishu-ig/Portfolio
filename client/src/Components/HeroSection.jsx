@@ -16,7 +16,7 @@ export default function HeroSection() {
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        let typingSpeed = isDeleting ? 50 : 100; 
+        let typingSpeed = isDeleting ? 50 : 100;
         let timeout;
 
         if (!isDeleting && text === words[currentWordIndex]) {
@@ -38,8 +38,8 @@ export default function HeroSection() {
     }, [text, isDeleting, currentWordIndex]);
 
     return (
-        <section 
-            id="home" 
+        <section
+            id="home"
             className="hero-section d-flex align-items-center"
             style={{
                 backgroundColor: "var(--bg-color)",
@@ -59,13 +59,21 @@ export default function HeroSection() {
                             <span className="cursor">|</span>
                         </div>
 
-                        <p className="lead" style={{color: "var(--text-color)" }}>Transforming ideas into elegant solutions through creative design and innovative development.</p>
+                        <p className="lead" style={{ color: "var(--text-color)" }}>Transforming ideas into elegant solutions through creative design and innovative development.</p>
 
                         {/* CTA Buttons */}
-                        <div className="d-flex gap-3 justify-content-center justify-content-lg-start mt-4">
-                            <a href="#portfolio" className="btn btn-primary btn-lg">View My Work</a>
-                            <a href="file/Ishaan CV.pdf" className="btn btn-outline-dark btn-lg px-5" target="_blank">Resume</a>
+                        <div className="action-buttons d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4 my-sm-3">
+                            <a href="#portfolio" className="btn btn-primary btn-lg">My Work</a>
+                            <a
+                                href="file/Ishaan CV.pdf"
+                                className="btn btn-outline-dark btn-lg px-4"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Resume
+                            </a>
                         </div>
+
 
                         {/* Stats Section */}
                         <div className="hero-stats mt-5 d-flex justify-content-center justify-content-lg-start gap-4">

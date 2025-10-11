@@ -60,7 +60,8 @@ export default function ProjectDetails() {
                         <p><strong className="fs-5">Tech Stack:</strong> {data.tech}</p>
                     </div>
 
-                    {data.githubRepo && (
+                    <div className="btn-group gap-3">
+                        {data.githubRepo && (
                         <div className="buttons mt-4">
                             <a
                                 href={data.githubRepo}
@@ -73,6 +74,16 @@ export default function ProjectDetails() {
                             </a>
                         </div>
                     )}
+                    <div className="buttons mt-4">
+                            <Link
+                                to = {`/`}
+                                className="btn btn-primary px-5"
+                                style={{ padding: "10px 20px", borderRadius: "8px", fontWeight: "600" }}
+                            >
+                                Home
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </section>
 
