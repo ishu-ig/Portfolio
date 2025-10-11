@@ -78,15 +78,15 @@ export default function HeroSection() {
                         {/* Stats Section */}
                         <div className="hero-stats mt-5 d-flex justify-content-center justify-content-lg-start gap-4">
                             <div className="stat-item">
-                                <span className="stat-number">5+</span>
+                                <span className="stat-number">1+</span>
                                 <span className="stat-label" style={{ color: "var(--text-color)" }}>Years Experience</span>
                             </div>
                             <div className="stat-item">
-                                <span className="stat-number">100+</span>
+                                <span className="stat-number">15+</span>
                                 <span className="stat-label" style={{ color: "var(--text-color)" }}>Projects Completed</span>
                             </div>
                             <div className="stat-item">
-                                <span className="stat-number">500+</span>
+                                <span className="stat-number">200+</span>
                                 <span className="stat-label" style={{ color: "var(--text-color)" }}>Programming Questions</span>
                             </div>
                         </div>
