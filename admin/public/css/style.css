@@ -1,0 +1,688 @@
+/* ====================================
+   🌐 BASE STYLES
+==================================== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #F5F7FA;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* ====================================
+   🚀 NAVBAR STYLES
+==================================== */
+.navbar {
+  background-color: #ffffff !important;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 12px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 20px;
+  color: #2563eb !important;
+}
+
+.sidebar-toggle {
+  border: none !important;
+  background: transparent !important;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.navbar .nav-link {
+  color: #1F2A40;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 10px;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.navbar .nav-link:hover {
+  color: #3498DB;
+  transform: translateY(-2px);
+}
+
+.navbar .btn-outline-danger {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 🔽 Mobile Dropdown */
+.dropdown .btn-light {
+  border: none;
+  background: #f8fafc !important;
+  transition: all 0.2s ease;
+}
+
+.dropdown .btn-light:hover {
+  background: #e2e8f0 !important;
+}
+
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  min-width: 180px;
+  padding: 5px 0;
+  animation: slideDown 0.25s ease;
+}
+
+.dropdown-item {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b !important;
+  transition: all 0.25s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0d6efd !important;
+}
+
+.dropdown-divider {
+  margin: 5px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====================================
+   📚 SIDEBAR STYLES
+==================================== */
+.admin-sidebar {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  height: calc(100vh - 56px);
+  background: #1e293b;
+  color: #fff;
+  transition: all 0.35s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+  z-index: 1050;
+}
+
+.admin-sidebar.expanded { width: 230px; }
+.admin-sidebar.collapsed { width: 70px; }
+
+.sidebar-header {
+  background: #0f172a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 15px 0;
+}
+
+.admin-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+}
+
+.admin-name {
+  font-weight: 600;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 6px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 60px 0;
+}
+
+.sidebar-menu li { margin: 4px 0; }
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cbd5e1;
+  padding: 10px 18px;
+  border-left: 3px solid transparent;
+  transition: all 0.25s ease-in-out;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+  background: #334155;
+  color: #fff;
+  border-left: 3px solid #38bdf8;
+}
+
+.sidebar-menu i {
+  font-size: 1rem;
+  width: 22px;
+  text-align: center;
+}
+
+.admin-sidebar.collapsed .sidebar-menu span,
+.admin-sidebar.collapsed .admin-name {
+  display: none;
+}
+
+/* Scrollbar */
+.admin-sidebar::-webkit-scrollbar { width: 6px; }
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+/* ====================================
+   🧭 CONTENT AREA (NO OVERLAP)
+==================================== */
+.dashboard-content {
+  margin-top: 56px;
+  padding: 25px;
+  background: #F5F7FA;
+  min-height: calc(100vh - 56px);
+  transition: margin-left 0.35s ease;
+}
+
+/* Sidebar width sync for large screens */
+.sidebar-open .dashboard-content {
+  margin-left: 230px;
+}
+.sidebar-closed .dashboard-content {
+  margin-left: 80px;
+}
+
+/* Divider line */
+.sidebar-open .dashboard-content::before {
+  content: "";
+  position: fixed;
+  top: 56px;
+  left: 230px;
+  width: 1px;
+  height: calc(100vh - 56px);
+  background: rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  transition: left 0.35s ease-in-out;
+}
+.sidebar-closed .dashboard-content::before { left: 80px; }
+
+/* Tablet & Mobile */
+@media (max-width: 992px) {
+  .admin-sidebar {
+    top: 56px;
+    left: -230px;
+    height: calc(100vh - 56px);
+    z-index: 2000;
+    box-shadow: 3px 0 12px rgba(0, 0, 0, 0.15);
+  }
+  .admin-sidebar.expanded { left: 0; }
+
+  .sidebar-open .dashboard-content,
+  .sidebar-closed .dashboard-content { margin-left: 0; }
+
+  .dashboard-content::before { display: none; }
+}
+
+/* Overlay for mobile */
+@media (max-width: 992px) {
+  .sidebar-overlay {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    z-index: 1045;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .sidebar-open .sidebar-overlay {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+/* ====================================
+   ⚙️ FOOTER
+==================================== */
+.footer {
+  background: #1F2A40;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.footer a {
+  color: #F1C40F;
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
+
+/* ====================================
+   📘 ADMIN SKILL TABLE STYLES
+==================================== */
+.admin-skill-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-top: 10px;
+  width: 100%;
+}
+
+.responsive-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.responsive-table thead th {
+  background-color: #1e293b;
+  color: #f8fafc;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.responsive-table tbody td {
+  vertical-align: middle;
+  font-size: 15px;
+  color: #1f2937;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.responsive-table tbody tr:hover { background-color: #f1f5f9; }
+
+/* Description scroll */
+.responsive-table td.description-cell {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+.responsive-table td.description-cell::-webkit-scrollbar {
+  width: 4px;
+}
+.responsive-table td.description-cell::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+.btn-outline-primary:hover {
+  background-color: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+.btn-outline-danger:hover {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+/* ====================================
+   📱 MOBILE (VERTICAL TABLE)
+==================================== */
+@media (max-width: 768px) {
+  .responsive-table thead { display: none; }
+
+  .responsive-table tbody tr {
+    display: block;
+    background: #fff;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 10px 15px;
+  }
+
+  .responsive-table tbody td {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .responsive-table tbody td:last-child { border-bottom: none; }
+
+  .responsive-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  /* Proper wrapping for long text */
+  .responsive-table tbody td span,
+  .responsive-table tbody td p {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+    font-size: 14px;
+    color: #1f2937;
+  }
+
+  /* Buttons in mobile view */
+  .responsive-table tbody td .btn {
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+/* ==========================================
+   📱 MOBILE MODE: Full-Width & Centered Buttons
+========================================== */
+@media (max-width: 768px) {
+  /* Center each cell content */
+  td[data-label="Edit"],
+  td[data-label="Delete"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  /* Common style for both action buttons */
+  .table-action-btn {
+    width: 100%;
+    max-width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  /* Edit button style */
+  .table-action-btn.edit {
+    border: 2px solid #2563eb !important;
+    background-color: rgba(37, 99, 235, 0.05);
+    color: #2563eb !important;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Delete button style */
+  .table-action-btn.delete {
+    border: 2px solid #dc2626 !important;
+    background-color: rgba(220, 38, 38, 0.05);
+    color: #dc2626 !important;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
+  }
+
+  .responsive-table thead th {
+  background-color: #1e293b;
+  color: #f8fafc;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.responsive-table tbody td {
+  vertical-align: middle;
+  font-size: 15px;
+  color: #1f2937;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.responsive-table tbody tr:hover { background-color: #f1f5f9; }
+
+/* Description scroll */
+.responsive-table td.description-cell {
+    margin-right: 0;
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+.responsive-table td.description-cell::-webkit-scrollbar {
+  width: 4px;
+}
+.responsive-table td.description-cell::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+  /* Hover feedback */
+  .table-action-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Icons centered and readable */
+  .table-action-btn i {
+    font-size: 18px;
+  }
+
+  /* Add spacing between edit & delete buttons if stacked vertically */
+  td[data-label="Edit"] {
+    margin-bottom: 6px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* ==========================================
+   🧩 FIX: Fullscreen Center & Isolation
+========================================== */
+.login-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: linear-gradient(-45deg, #9896F0, #FBC8D5, #ADEDD5, #FBEE97);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  z-index: 99999 !important;
+  overflow: hidden;
+}
+
+body.login-active {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==========================================
+   💎 Login Box
+========================================== */
+.login-container {
+  background: #fff;
+  padding: 40px 35px;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeInUp 0.7s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================
+   🔤 Title
+========================================== */
+.login-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* ==========================================
+   🧠 Input Fields
+========================================== */
+.login-field {
+  position: relative;
+  margin-top: 18px;
+}
+
+.login-field input {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.login-field input:focus {
+  border-color: #12e8f0;
+  outline: none;
+}
+
+.login-eye {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+}
+
+/* ==========================================
+   🔗 Forgot Password
+========================================== */
+.login-pass-link {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.login-pass-link a {
+  text-decoration: none;
+  color: #2563eb;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.login-pass-link a:hover {
+  color: #1748cc;
+}
+
+/* ==========================================
+   🔘 Button
+========================================== */
+.login-btn {
+  height: 45px;
+  margin-top: 25px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.login-btn-layer {
+  height: 100%;
+  width: 300%;
+  background: linear-gradient(to right, #FBEE97, #ADEDD5, #FBEE97);
+  position: absolute;
+  left: -100%;
+  transition: all 0.4s ease;
+}
+
+.login-btn:hover .login-btn-layer {
+  left: 0;
+}
+
+.login-btn input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: 17px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================
+   ⚠️ Error Message
+========================================== */
+.login-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ==========================================
+   📱 Responsive
+========================================== */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .login-title {
+    font-size: 24px;
+  }
+}
+
+
+
+

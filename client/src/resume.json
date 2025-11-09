@@ -1,0 +1,142 @@
+{
+  "name": "Ishaan Gupta",
+  "title": "Full Stack Developer",
+  "education": {
+    "Graduation": {
+      "institute": "Raj Kumar Goel Institute Of Technology",
+      "percentage": "80",
+      "location": "Ghaziabad"
+    },
+    "High School": {
+      "institute": "Asha Modern School",
+      "percentage": "80",
+      "location": "Saharanpur"
+    },
+    "Senior Secondary": {
+      "institute": "Asha Modern School",
+      "percentage": "80",
+      "location": "Saharanpur"
+    }
+  },
+  "skills": ["React", "Node.js", "MongoDB", "Redux", "Java", "C++"],
+  "projects": {
+    "ShopKaro": {
+      "short": "🛒 MERN e-commerce app with Razorpay payments",
+      "desc": "ShopKaro is a full-stack e-commerce platform built with the MERN stack. It allows users to browse products, manage carts, make secure payments using Razorpay, and track their orders. It includes authentication, role-based admin panel, and responsive UI.",
+      "link": "https://shopkaro-sflc.onrender.com",
+      "points": [
+        "Secure payments with Razorpay",
+        "Role-based admin dashboard",
+        "Cart and order management",
+        "Responsive UI for all devices"
+      ]
+    },
+    "EasyDine": {
+      "short": "🍽️ Food ordering & booking app",
+      "desc": "EasyDine is a food ordering and restaurant table booking application. It provides real-time seat booking, food ordering, and payment gateway integration for a smooth dining experience.",
+      "link": "https://easydine-86b9.onrender.com",
+      "points": [
+        "Live restaurant table booking",
+        "Integrated payment gateway",
+        "Food ordering system",
+        "User-friendly and responsive UI"
+      ]
+    },
+    "Portfolio": {
+      "short": "🌐 Personal MERN portfolio with admin panel",
+      "desc": "A responsive portfolio website showcasing my projects, skills, and achievements. Built with MERN stack and includes an admin panel for managing content.",
+      "link": "https://portfolio-g2rt.onrender.com",
+      "points": [
+        "Dynamic content management with admin panel",
+        "Showcases projects and skills",
+        "Fully responsive design",
+        "Deployed and live online"
+      ]
+    }
+  },
+  "achievements": [
+    "🏆 2nd Place in Techzicbition Delhi",
+    "📡 IoT Workshop at IIT Varanasi",
+    "📜 Python Certification (Coursera Meta)"
+  ],
+  "certificates": [
+    {
+      "name": "Meta Back-End Developer Certificate",
+      "issuer": "Coursera",
+      "year": "2024"
+    },
+    {
+      "name": "JavaScript Algorithms and Data Structures",
+      "issuer": "freeCodeCamp",
+      "year": "2023"
+    },
+    {
+      "name": "MongoDB Node.js Developer Certification",
+      "issuer": "MongoDB University",
+      "year": "2023"
+    }
+  ],
+  "contact": {
+    "email": "ishaanguptacse@gmail.com",
+    "github": "https://github.com/ishu-ig",
+    "portfolio": "https://portfolio-g2rt.onrender.com",
+    "linkedin": "https://www.linkedin.com/in/ishaan-gupta-2a0568242"
+  },
+  "services": [
+    {
+      "name": "E-commerce Development",
+      "icon": "fa fa-shopping-cart",
+      "shortDescription": "Online stores with secure payments & modern UI",
+      "longDescription": "Build scalable and feature-rich e-commerce platforms with seamless checkout, secure payments, and user-friendly interfaces. From product catalogs to cart management and order tracking, I create optimized solutions with Razorpay/Stripe integration and advanced analytics for sales tracking.",
+      "price": 7000,
+      "duration": "8",
+      "category": "Web & E-commerce",
+      "technology": "MERN, Razorpay API, Stripe, Firebase",
+      "active": true
+    },
+    {
+      "name": "Backend & API Development",
+      "icon": "fa fa-database",
+      "shortDescription": "Secure, scalable API solutions",
+      "longDescription": "Build fast and secure REST & GraphQL APIs to power applications with real-time data handling. My APIs ensure seamless communication between frontend and backend with authentication, role-based access, and database optimization for high performance.",
+      "price": 5000,
+      "duration": "6",
+      "category": "Backend Development",
+      "technology": "Node.js, Express, MongoDB, Postman",
+      "active": true
+    },
+    {
+      "name": "AI-Powered Chatbots",
+      "icon": "fa fa-comments",
+      "shortDescription": "Intelligent chatbots for automation & support",
+      "longDescription": "AI-driven chatbots enhance customer engagement and automate responses. Using NLP and machine learning, my chatbots handle FAQs, customer queries, and even support ticketing. They integrate seamlessly into websites and messaging apps, offering 24/7 support while reducing operational costs.",
+      "price": 8000,
+      "duration": "8",
+      "category": "AI & Automation",
+      "technology": "Python, TensorFlow, OpenAI API, React",
+      "active": true
+    },
+    {
+      "name": "Full-Stack Web Development",
+      "icon": "fa fa-code",
+      "shortDescription": "Custom websites & web apps for businesses",
+      "longDescription": "I develop dynamic and scalable web applications with modern UI/UX, responsive design, and backend integration. Using the MERN stack, I ensure high performance, security, and seamless user experience. Whether it’s a business site, portfolio, or complex web app, I deliver tailored solutions that meet industry standards.",
+      "price": 7000,
+      "duration": "6",
+      "category": "Web Development",
+      "technology": "MERN Stack (MongoDB, Express, React, Node), Bootstrap",
+      "active": true
+    },
+    {
+      "name": "Static Website Development",
+      "icon": "fa fa-globe",
+      "shortDescription": "Fast, lightweight, and SEO-friendly static websites",
+      "longDescription": "I create beautifully designed, fast-loading, and SEO-optimized static websites. These sites are perfect for portfolios, business landing pages, and informational websites. With a focus on responsiveness and performance, I ensure your website delivers an excellent user experience across all devices. No database required, making it ultra-secure and low-maintenance.",
+      "price": 3000,
+      "duration": "2",
+      "category": "Web Development",
+      "technology": "HTML, CSS, JavaScript, Bootstrap, Tailwind CSS",
+      "active": true
+    }
+  ]
+}
