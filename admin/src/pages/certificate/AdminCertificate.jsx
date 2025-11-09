@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -171,4 +172,94 @@ export default function AdminCertificate() {
       </div>
     </div>
   );
+=======
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import $ from 'jquery';                                         // Import jQuery
+import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
+import 'datatables.net';
+
+import { deleteCertificate, getCertificate } from "../../Redux/ActionCreartors/CertificateActionCreators"
+export default function AdminCertificate() {
+    let CertificateStateData = useSelector(state => state.CertificateStateData)
+    let dispatch = useDispatch()
+
+    // function deleteRecord(id) {
+    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
+    //         dispatch(deleteCertificate({ id: id }))
+    //         getAPIData()
+    //     }
+    // }
+    function deleteRecord(_id) {
+        if (window.confirm("Are You Sure to Delete that Item : ")) {
+            dispatch(deleteCertificate({ _id: _id }))
+            getAPIData()
+        }
+    }
+    function getAPIData() {
+        dispatch(getCertificate())
+        let time = setTimeout(() => {
+            $('#DataTable').DataTable()
+        }, 500)
+        return time
+    }
+    useEffect(() => {
+        let time = getAPIData()
+        return () => clearTimeout(time)
+    }, [CertificateStateData.length])
+
+
+    return (
+        <>
+            <div className="container-fluid">
+                {/* Header */}
+                <h5 className="text-center text-light bg-primary p-3">Certificate <Link to="/Certificate/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
+                {/* Table */}
+                <div className="table-responsive mt-3">
+                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
+                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
+                            <tr>
+                                <th>Id</th>
+
+                                <th>Name</th>
+                                <th>Pic</th>
+                                <th>Issued By</th>
+                                <th>Active</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                CertificateStateData.map((item) => {
+                                    return <tr key={item._id}>
+                                        {/* return <tr key={item._id}> */}
+                                        {/* <td>{item.id}</td> */}
+                                        <td>{item._id}</td>
+                                        <td>{item.name}</td>
+                                        <td>
+                                            <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} target='_blank' rel='noreferrer'>
+                                                <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} height={50} width={80} alt="" />
+                                            </Link>
+                                        </td>
+                                        
+                                        <td>{item.issuedBy}</td>
+                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
+                                        {/* <td><Link to={`/admin/Certificate/update/${item.id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link></td>
+                                                <td>{localStorage.getItem("role")==="Super Admin"?<button className='btn btn-danger' onClick={() => deleteRecord(item.id)}><i className='fa fa-trash fs-4'></i></button>:null}</td> */}
+                                        <td><Link to={`/Certificate/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
+                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
+                                    </tr>
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
+    );
+>>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }

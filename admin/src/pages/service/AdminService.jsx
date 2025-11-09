@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -211,4 +212,97 @@ export default function AdminService() {
       </div>
     </>
   );
+=======
+import React, { useEffect, useRef, useState } from 'react'
+
+import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import $ from 'jquery';                                         // Import jQuery
+import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
+import 'datatables.net';
+
+import { deleteService, getService } from "../../Redux/ActionCreartors/ServiceActionCreators"
+
+export default function AdminService() {
+    let ServiceStateData = useSelector(state => state.ServiceStateData)
+    let dispatch = useDispatch()
+
+    // function deleteRecord(id) {
+    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
+    //         dispatch(deleteService({ id: id }))
+    //         getAPIData()
+    //     }
+    // }
+
+    function deleteRecord(_id) {
+        if (window.confirm("Are You Sure to Delete that Item : ")) {
+            dispatch(deleteService({ _id: _id }))
+            getAPIData()
+        }
+    }
+    function getAPIData() {
+        dispatch(getService())
+        let time = setTimeout(() => {
+            $('#DataTable').DataTable()
+        }, 500)
+        return time
+    }
+    useEffect(() => {
+        let time = getAPIData()
+        return () => clearTimeout(time)
+    }, [ServiceStateData.length])
+
+
+    return (
+        <>
+            <div className="container-fluid">
+                {/* Header */}
+                <h5 className="text-center text-light bg-primary p-3">Service <Link to="/service/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
+                {/* Table */}
+                <div className="table-responsive mt-3">
+                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
+                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Short Description</th>
+                                <th>Icon</th>
+                                <th>Price</th>
+                                <th>Duration</th>
+                                <th>Category</th>
+                                <th>Technology</th>
+                                <th>Active</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                ServiceStateData.map((item) => {
+                                    return <tr key={item._id}>
+                                        {/* return <tr key={item._id}> */}
+                                        <td>{item._id}</td>
+                                        {/* <td>{item.id}</td> */}
+                                        <td>{item.name}</td>
+                                        <td>{item.shortDescription}</td>
+                                        <td>{item.icon}</td>
+                                        <td>&#8377; {item.price}</td>
+                                        <td>{item.duration} Weeks</td>
+                                        <td>{item.category}</td>
+                                        <td>{item.technology}</td>
+                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
+                                        <td><Link to={`/service/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
+                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
+                                    </tr>
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
+    );
+>>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }

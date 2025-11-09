@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -228,4 +229,93 @@ export default function AdminUpdateExperience() {
       </div>
     </>
   );
+=======
+import React, { useEffect, useState } from 'react'
+
+import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import $ from 'jquery';                                         // Import jQuery
+import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
+import 'datatables.net';
+
+import { deleteExperience, getExperience } from "../../Redux/ActionCreartors/ExperienceActionCreators"
+export default function AdminExperience() {
+    let ExperienceStateData = useSelector(state => state.ExperienceStateData)
+    let dispatch = useDispatch()
+
+    // function deleteRecord(id) {
+    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
+    //         dispatch(deleteExperience({ id: id }))
+    //         getAPIData()
+    //     }
+    // }
+
+    function deleteRecord(_id) {
+        if (window.confirm("Are You Sure to Delete that Item : ")) {
+            dispatch(deleteExperience({ _id: _id }))
+            getAPIData()
+        }
+    }
+    function getAPIData() {
+        dispatch(getExperience())
+        let time = setTimeout(() => {
+            $('#DataTable').DataTable()
+        }, 500)
+        return time
+    }
+    useEffect(() => {
+        let time = getAPIData()
+        return () => clearTimeout(time)
+    }, [ExperienceStateData.length])
+
+
+    return (
+        <>
+            <div className="container-fluid">
+                {/* Header */}
+                <h5 className="text-center text-light bg-primary p-3">Experience <Link to="/Experience/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
+                {/* Table */}
+                <div className="table-responsive mt-3">
+                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
+                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
+                            <tr>
+                                <th>Id</th>
+
+                                <th>Job Title</th>
+                                <th>Company Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Description</th>
+                                <th>Active</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                ExperienceStateData.map((item) => {
+                                    return <tr key={item._id}>
+                                        {/* return <tr key={item._id}> */}
+                                        <td>{item._id}</td>
+                                        {/* <td>{item.id}</td> */}
+                                        <td>{item.jobTitle}</td>
+                                        <td>{item.companyName}</td>
+                                        <td>{item.startDate}</td>
+                                        <td>{item.endDate}</td>
+                                        <td>{item.description}</td>
+                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
+                                        <td><Link to={`/Experience/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
+                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
+                                    </tr>
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
+    );
+>>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }
