@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +14,12 @@ export default function AdminPortfolio() {
   const dispatch = useDispatch();
   const tableRef = useRef(null);
 
-  // Fetch data
+  // 🧾 Fetch data
   useEffect(() => {
     dispatch(getPortfolio());
   }, [dispatch]);
 
-  // Initialize DataTable
+  // ⚙️ Initialize DataTable safely
   useEffect(() => {
     if (PortfolioStateData.length > 0 && tableRef.current) {
       if ($.fn.DataTable.isDataTable(tableRef.current)) {
@@ -47,6 +46,7 @@ export default function AdminPortfolio() {
     }
   }, [PortfolioStateData]);
 
+  // 🗑 Delete portfolio
   const deleteRecord = (_id) => {
     if (window.confirm("Are you sure you want to delete this portfolio?")) {
       dispatch(deletePortfolio({ _id }));
@@ -56,16 +56,15 @@ export default function AdminPortfolio() {
 
   return (
     <>
-      {/* 📱 Scoped CSS for mobile & laptop balance */}
+      {/* 📱 Scoped CSS for responsive view */}
       <style>{`
-        /* Default desktop/laptop styles */
-        .responsive-table td,
-        .responsive-table th {
+        /* Desktop / Laptop */
+        .responsive-table td, .responsive-table th {
           font-size: 15px !important;
           padding: 10px 12px !important;
           white-space: nowrap !important;
-          text-overflow: ellipsis !important;
           overflow: hidden !important;
+          text-overflow: ellipsis !important;
           vertical-align: middle !important;
         }
 
@@ -76,20 +75,6 @@ export default function AdminPortfolio() {
           object-fit: cover;
         }
 
-        /* Compact alignment for laptop view */
-        .table td,
-        .table th {
-          vertical-align: middle !important;
-        }
-
-        .table td a {
-          font-size: 14px !important;
-        }
-
-        .table td span.badge {
-          font-size: 13px !important;
-        }
-
         /* ✅ Mobile Optimization */
         @media (max-width: 768px) {
           .table-responsive {
@@ -97,30 +82,12 @@ export default function AdminPortfolio() {
             width: 100% !important;
           }
 
-          .responsive-table tbody td {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-            text-align: center !important;
-            padding: 8px 4px !important;
-            border-bottom: 1px solid #e5e7eb !important;
-            flex-wrap: wrap !important;
-            white-space: normal !important;
-            word-break: break-word !important;
-            overflow: visible !important;
-            max-width: 100% !important;
-            font-size: 14px !important;
-            line-height: 1.4 !important;
-          }
-
-          /* Hide unnecessary columns */
           td[data-label="ID"],
           td[data-label="Live URL"],
           td[data-label="Github"] {
             display: none !important;
           }
 
-          /* Keep visible */
           td[data-label="Name"],
           td[data-label="Image"],
           td[data-label="Category"],
@@ -130,24 +97,27 @@ export default function AdminPortfolio() {
           td[data-label="Edit"],
           td[data-label="Delete"] {
             display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+            flex-wrap: wrap !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+            font-size: 14px !important;
           }
 
-          /* Image center + consistent size */
           td[data-label="Image"] img {
             display: block !important;
             margin: 0 auto !important;
-            border-radius: 8px;
             height: 70px;
             width: 100px;
-            object-fit: cover;
+            border-radius: 8px;
           }
 
-          /* Make Tech & Description full width */
           td[data-label="Tech"],
           td[data-label="Short Description"] {
             flex-direction: column !important;
             align-items: flex-start !important;
-            justify-content: flex-start !important;
             text-align: left !important;
             padding: 10px 12px !important;
             background: #f9fafb !important;
@@ -155,14 +125,6 @@ export default function AdminPortfolio() {
             margin: 4px 0 !important;
             white-space: normal !important;
             word-wrap: break-word !important;
-          }
-
-          td[data-label="Status"] span,
-          .table-action-btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin: 4px auto;
           }
 
           html, body {
@@ -173,16 +135,11 @@ export default function AdminPortfolio() {
           .admin-skill-container {
             padding: 10px !important;
           }
-
-          .admin-skill-container h5,
-          .bg-primary {
-            text-align: center !important;
-          }
         }
       `}</style>
 
       <div className="admin-skill-container p-3">
-        {/* Header */}
+        {/* 🔹 Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-primary text-light rounded p-3 shadow-sm">
           <h5 className="mb-2 mb-md-0 fw-semibold text-light">
             <i className="fa fa-folder-open me-2"></i> Portfolio Management
@@ -195,7 +152,7 @@ export default function AdminPortfolio() {
           </Link>
         </div>
 
-        {/* Table */}
+        {/* 🔹 Table */}
         <div className="table-responsive mt-4">
           <table
             ref={tableRef}
@@ -308,97 +265,4 @@ export default function AdminPortfolio() {
       </div>
     </>
   );
-=======
-import React, { useEffect, useState } from 'react'
-
-import { Link } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import $ from 'jquery';                                         // Import jQuery
-import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
-import 'datatables.net';
-
-import { deletePortfolio, getPortfolio } from "../../Redux/ActionCreartors/PortfolioActionCreators"
-export default function AdminPortfolio() {
-    let PortfolioStateData = useSelector(state => state.PortfolioStateData)
-    let dispatch = useDispatch()
-
-    // function deleteRecord(id) {
-    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
-    //         dispatch(deletePortfolio({ id: id }))
-    //         getAPIData()
-    //     }
-    // }
-    function deleteRecord(_id) {
-        if (window.confirm("Are You Sure to Delete that Item : ")) {
-            dispatch(deletePortfolio({ _id: _id }))
-            getAPIData()
-        }
-    }
-    function getAPIData() {
-        dispatch(getPortfolio())
-        let time = setTimeout(() => {
-            $('#DataTable').DataTable()
-        }, 500)
-        return time
-    }
-    useEffect(() => {
-        let time = getAPIData()
-        return () => clearTimeout(time)
-    }, [PortfolioStateData.length])
-    return (
-        <>
-            <div>
-                <h5 className='bg-primary text-light text-center p-3'>Portfolio <Link to="/portfolio/create"><i className='fa fa-plus text-light float-end'></i></Link></h5>
-                <div className="table-responsive">
-                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
-                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Pic</th>
-                                <th>Short Description</th>
-                                <th>Category</th>
-                                <th>Technology</th>
-                                <th>Live URL</th>
-                                <th>Github URL</th>
-                                <th>Active</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                PortfolioStateData.map((item) => {
-                                    return <tr key={item._id}>
-                                        {/* return <tr key={item._id}> */}
-                                        {/* <td>{item.id}</td> */}
-                                        <td>{item._id}</td>
-                                        <td>{item.name}</td>
-                                        <td>
-                                            <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} target='_blank' rel='noreferrer'>
-                                                <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} height={50} width={80} alt="" />
-                                            </Link>
-                                        </td>
-                                        <td>{item.shortDescription}</td>
-                                        <td>{item.category}</td>
-                                        <td>{item.tech}</td>
-                                        <td>{item.liveUrl}</td>
-                                        <td>{item.githubRepo}</td>                                
-                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
-                                        {/* <td><Link to={`/admin/Portfolio/update/${item.id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link></td>
-                                                <td>{localStorage.getItem("role")==="Super Admin"?<button className='btn btn-danger' onClick={() => deleteRecord(item.id)}><i className='fa fa-trash fs-4'></i></button>:null}</td> */}
-                                        <td><Link to={`/portfolio/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    )
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }

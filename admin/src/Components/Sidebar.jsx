@@ -1,12 +1,11 @@
 import React from "react";
-<<<<<<< HEAD
 import { Link, useLocation } from "react-router-dom";
 
 export default function AdminSidebar({ isExpanded }) {
   const location = useLocation();
 
   const menuItems = [
-    { path: "/", icon: "fa-home", label: "Dashboard" },
+    { path: "/dashboard", icon: "fa-home", label: "Dashboard" },
     { path: "/skill", icon: "fa-lightbulb", label: "Skills" },
     { path: "/education", icon: "fa-graduation-cap", label: "Education" },
     { path: "/experience", icon: "fa-briefcase", label: "Experience" },
@@ -32,16 +31,16 @@ export default function AdminSidebar({ isExpanded }) {
       </div>
 
       {/* Menu */}
-      <ul className="sidebar-menu">
+      <ul className="sidebar-menu list-unstyled">
         {menuItems.map((item) => (
           <li key={item.path}>
             <Link
               to={item.path}
-              className={
-                location.pathname === item.path ? "active nav-link" : "nav-link"
-              }
+              className={`nav-link d-flex align-items-center ${
+                location.pathname === item.path ? "active" : ""
+              }`}
             >
-              <i className={`fa ${item.icon}`}></i>
+              <i className={`fa ${item.icon} me-2`}></i>
               {isExpanded && <span>{item.label}</span>}
             </Link>
           </li>
@@ -49,31 +48,4 @@ export default function AdminSidebar({ isExpanded }) {
       </ul>
     </aside>
   );
-=======
-import { Link } from "react-router-dom";
-
-export default function AdminSidebar({ isExpanded }) {
-    return (
-        <div id="sidebar" className={isExpanded ? "expanded" : ""}>
-            <div className="sidebar-header">
-                <img src="https://i.pravatar.cc/100" alt="Admin" className="admin-avatar" />
-                <span className="admin-name">John Doe</span>
-            </div>
-
-            <ul className="nav flex-column mt-3  sidebar-nav">
-                <li><Link to="/dashboard" className="nav-link"><i className="fa fa-home"></i> <span>Dashboard</span></Link></li>
-                <li><Link to="/skill" className="nav-link"><i className="fa fa-list"></i> <span>Skill</span></Link></li>
-                <li><Link to="/education" className="nav-link"><i className="fa fa-list"></i> <span>Education</span></Link></li>
-                <li><Link to="/experience" className="nav-link"><i className="fa fa-list"></i> <span>Experiences</span></Link></li>
-                <li><Link to="/certificate" className="nav-link"><i className="fa fa-list"></i> <span>Certificate</span></Link></li>
-                <li><Link to="/portfolio" className="nav-link"><i className="fa fa-star"></i> <span>Portfolio</span></Link></li>
-                <li><Link to="/service" className="nav-link"><i className="fa fa-envelope"></i> <span>Service</span></Link></li>
-                <li><Link to="/testimonial" className="nav-link"><i className="fa fa-shopping-cart"></i> <span>Testimonial</span></Link></li>
-                <li><Link to="/user" className="nav-link"><i className="fa fa-users"></i> <span>User</span></Link></li>
-                <li><Link to="/contactus" className="nav-link"><i className="fa fa-phone"></i> <span>ContactUs</span></Link></li>
-                <li><Link to="/settings" className="nav-link"><i className="fa fa-cog"></i> <span>Settings</span></Link></li>
-            </ul>
-        </div>
-    );
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }
