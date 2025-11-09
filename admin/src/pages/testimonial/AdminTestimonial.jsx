@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,16 +53,13 @@ export default function AdminTestimonial() {
 
   return (
     <>
-      {/* 📱 Scoped Mobile CSS */}
+      {/* 📱 Mobile Responsive Adjustments */}
       <style>{`
         @media (max-width: 768px) {
-          /* Hide less important columns */
           td[data-label="ID"],
           td[data-label="Message"] {
             display: none !important;
           }
-
-          /* Image center + size */
           td[data-label="Pic"] img {
             display: block;
             margin: 0 auto;
@@ -72,14 +68,10 @@ export default function AdminTestimonial() {
             height: 70px;
             object-fit: cover;
           }
-
-          /* Center all content */
           td {
             text-align: center !important;
             vertical-align: middle !important;
           }
-
-          /* Center badges and buttons */
           td[data-label="Active"],
           td[data-label="Edit"],
           td[data-label="Delete"] {
@@ -87,15 +79,9 @@ export default function AdminTestimonial() {
             justify-content: center !important;
             align-items: center !important;
           }
-
-          /* Prevent horizontal scroll */
-          .table-responsive {
+          .table-responsive, html, body {
             overflow-x: hidden !important;
           }
-          html, body {
-            overflow-x: hidden !important;
-          }
-
           .admin-skill-container {
             padding: 10px !important;
           }
@@ -128,7 +114,7 @@ export default function AdminTestimonial() {
                 <th>ID</th>
                 <th>Name</th>
                 <th>Pic</th>
-                <th>Active</th>
+                <th>Status</th>
                 <th>Message</th>
                 <th className="text-center">Edit</th>
                 <th className="text-center">Delete</th>
@@ -139,17 +125,12 @@ export default function AdminTestimonial() {
               {TestimonialStateData && TestimonialStateData.length > 0 ? (
                 TestimonialStateData.map((item, i) => (
                   <tr key={item._id || i}>
-                    {/* ID */}
                     <td data-label="ID" className="text-muted small">
                       {item._id}
                     </td>
-
-                    {/* Name */}
                     <td data-label="Name" className="fw-semibold">
                       {item.name}
                     </td>
-
-                    {/* Pic */}
                     <td data-label="Pic">
                       <Link
                         to={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`}
@@ -164,9 +145,7 @@ export default function AdminTestimonial() {
                         />
                       </Link>
                     </td>
-
-                    {/* Active Status */}
-                    <td data-label="Active">
+                    <td data-label="Status">
                       <span
                         className={`badge px-3 py-2 ${
                           item.active ? "bg-success" : "bg-danger"
@@ -175,8 +154,6 @@ export default function AdminTestimonial() {
                         {item.active ? "Active" : "Inactive"}
                       </span>
                     </td>
-
-                    {/* Message */}
                     <td
                       data-label="Message"
                       className="text-wrap text-muted"
@@ -184,8 +161,6 @@ export default function AdminTestimonial() {
                     >
                       {item.message}
                     </td>
-
-                    {/* ✏️ Edit */}
                     <td data-label="Edit" className="text-center">
                       <Link
                         to={`/testimonial/update/${item._id}`}
@@ -195,8 +170,6 @@ export default function AdminTestimonial() {
                         <i className="fa fa-edit"></i>
                       </Link>
                     </td>
-
-                    {/* 🗑️ Delete */}
                     <td data-label="Delete" className="text-center">
                       <button
                         className="table-action-btn delete"
@@ -221,91 +194,4 @@ export default function AdminTestimonial() {
       </div>
     </>
   );
-=======
-import React, { useEffect, useState } from 'react'
-
-import { Link } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import $ from 'jquery';                                         // Import jQuery
-import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
-import 'datatables.net';
-
-import { deleteTestimonial, getTestimonial } from "../../Redux/ActionCreartors/TestimonialActionCreators"
-export default function AdminTestimonial() {
-    let TestimonialStateData = useSelector(state => state.TestimonialStateData)
-    let dispatch = useDispatch()
-
-    // function deleteRecord(id) {
-    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
-    //         dispatch(deleteTestimonial({ id: id }))
-    //         getAPIData()
-    //     }
-    // }
-    function deleteRecord(_id) {
-        if (window.confirm("Are You Sure to Delete that Item : ")) {
-            dispatch(deleteTestimonial({ _id: _id }))
-            getAPIData()
-        }
-    }
-    function getAPIData() {
-        dispatch(getTestimonial())
-        let time = setTimeout(() => {
-            $('#DataTable').DataTable()
-        }, 500)
-        return time
-    }
-    useEffect(() => {
-        let time = getAPIData()
-        return () => clearTimeout(time)
-    }, [TestimonialStateData.length])
-    return (
-        <>
-
-            <div>
-                <h5 className='bg-primary text-light text-center p-3'>Testimonial <Link to="/testimonial/create"><i className='fa fa-plus text-light float-end'></i></Link></h5>
-                <div className="table-responsive">
-                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
-                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
-                            <tr>
-                                <th>Id</th>
-
-                                <th>Name</th>
-                                <th>Pic</th>
-                                <th>Active</th>
-                                <th>Message</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                TestimonialStateData.map((item) => {
-                                    return <tr key={item._id}>
-                                        <td>{item._id}</td>
-                                        <td>{item.name}</td>
-                                        <td>
-                                            <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} target='_blank' rel='noreferrer'>
-                                                <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} height={50} width={80} alt="" />
-                                            </Link>
-                                        </td>
-                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
-                                        <td>
-                                            <div className='testimonial-message'>{item.message}</div>
-                                        </td>
-                                        {/* <td><Link to={`/admin/testimonial/update/${item.id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link></td>
-                                                <td>{localStorage.getItem("role")==="Super Admin"?<button className='btn btn-danger' onClick={() => deleteRecord(item.id)}><i className='fa fa-trash fs-4'></i></button>:null}</td> */}
-                                        <td><Link to={`/testimonial/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    )
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }

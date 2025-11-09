@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +14,12 @@ export default function AdminService() {
   const dispatch = useDispatch();
   const tableRef = useRef(null);
 
-  // ✅ Fetch Services
+  // 🔹 Fetch all services
   useEffect(() => {
     dispatch(getService());
   }, [dispatch]);
 
-  // ✅ Initialize DataTable safely
+  // 🔹 Initialize DataTable with responsive configuration
   useEffect(() => {
     if (ServiceStateData.length > 0 && tableRef.current) {
       if ($.fn.DataTable.isDataTable(tableRef.current)) {
@@ -38,13 +37,13 @@ export default function AdminService() {
           },
           columnDefs: [{ orderable: false, targets: [9, 10] }],
         });
-      }, 150);
+      }, 200);
 
       return () => clearTimeout(timer);
     }
   }, [ServiceStateData]);
 
-  // 🗑 Delete Service
+  // 🗑 Delete a service
   const deleteRecord = (_id) => {
     if (window.confirm("Are you sure you want to delete this service?")) {
       dispatch(deleteService({ _id }));
@@ -54,10 +53,9 @@ export default function AdminService() {
 
   return (
     <>
-      {/* 📱 Scoped Mobile CSS */}
+      {/* 📱 Responsive styling for mobile view */}
       <style>{`
         @media (max-width: 768px) {
-          /* Hide less important columns */
           td[data-label="ID"],
           td[data-label="Icon"],
           td[data-label="Duration"],
@@ -66,14 +64,12 @@ export default function AdminService() {
             display: none !important;
           }
 
-          /* Make short description fully visible */
           td[data-label="Short Description"] {
             white-space: normal !important;
             text-align: left !important;
             line-height: 1.4;
           }
 
-          /* Center actions and badges */
           td[data-label="Status"],
           td[data-label="Edit"],
           td[data-label="Delete"] {
@@ -82,7 +78,6 @@ export default function AdminService() {
             align-items: center !important;
           }
 
-          /* Prevent horizontal scroll */
           .table-responsive {
             overflow-x: hidden !important;
           }
@@ -91,12 +86,10 @@ export default function AdminService() {
             overflow-x: hidden !important;
           }
 
-          /* Compact container */
           .admin-skill-container {
             padding: 12px !important;
           }
 
-          /* Adjust table layout */
           .responsive-table {
             width: 100% !important;
             border-collapse: collapse !important;
@@ -105,7 +98,7 @@ export default function AdminService() {
       `}</style>
 
       <div className="admin-skill-container p-3">
-        {/* 🔹 Header Section */}
+        {/* Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-primary text-light rounded p-3 shadow-sm">
           <h5 className="mb-2 mb-md-0 fw-semibold text-light">
             <i className="fa fa-cogs me-2"></i> Service Management
@@ -118,7 +111,7 @@ export default function AdminService() {
           </Link>
         </div>
 
-        {/* 🔹 Table Section */}
+        {/* Table */}
         <div className="table-responsive mt-4">
           <table
             ref={tableRef}
@@ -154,10 +147,7 @@ export default function AdminService() {
                     <td data-label="Icon">
                       <i className={`${item.icon} fs-4 text-primary`}></i>
                     </td>
-                    <td
-                      data-label="Short Description"
-                      className="description-cell text-wrap"
-                    >
+                    <td data-label="Short Description" className="text-wrap">
                       {item.shortDescription || "—"}
                     </td>
                     <td
@@ -212,97 +202,4 @@ export default function AdminService() {
       </div>
     </>
   );
-=======
-import React, { useEffect, useRef, useState } from 'react'
-
-import { Link } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import $ from 'jquery';                                         // Import jQuery
-import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
-import 'datatables.net';
-
-import { deleteService, getService } from "../../Redux/ActionCreartors/ServiceActionCreators"
-
-export default function AdminService() {
-    let ServiceStateData = useSelector(state => state.ServiceStateData)
-    let dispatch = useDispatch()
-
-    // function deleteRecord(id) {
-    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
-    //         dispatch(deleteService({ id: id }))
-    //         getAPIData()
-    //     }
-    // }
-
-    function deleteRecord(_id) {
-        if (window.confirm("Are You Sure to Delete that Item : ")) {
-            dispatch(deleteService({ _id: _id }))
-            getAPIData()
-        }
-    }
-    function getAPIData() {
-        dispatch(getService())
-        let time = setTimeout(() => {
-            $('#DataTable').DataTable()
-        }, 500)
-        return time
-    }
-    useEffect(() => {
-        let time = getAPIData()
-        return () => clearTimeout(time)
-    }, [ServiceStateData.length])
-
-
-    return (
-        <>
-            <div className="container-fluid">
-                {/* Header */}
-                <h5 className="text-center text-light bg-primary p-3">Service <Link to="/service/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
-                {/* Table */}
-                <div className="table-responsive mt-3">
-                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
-                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Short Description</th>
-                                <th>Icon</th>
-                                <th>Price</th>
-                                <th>Duration</th>
-                                <th>Category</th>
-                                <th>Technology</th>
-                                <th>Active</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                ServiceStateData.map((item) => {
-                                    return <tr key={item._id}>
-                                        {/* return <tr key={item._id}> */}
-                                        <td>{item._id}</td>
-                                        {/* <td>{item.id}</td> */}
-                                        <td>{item.name}</td>
-                                        <td>{item.shortDescription}</td>
-                                        <td>{item.icon}</td>
-                                        <td>&#8377; {item.price}</td>
-                                        <td>{item.duration} Weeks</td>
-                                        <td>{item.category}</td>
-                                        <td>{item.technology}</td>
-                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
-                                        <td><Link to={`/service/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    );
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }

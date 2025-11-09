@@ -1,321 +1,199 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import $ from "jquery";
+import "datatables.net-dt/css/dataTables.dataTables.min.css";
+import "datatables.net";
 
-import formValidator from "../../FormValidators/formValidator";
-import { getExperience, updateExperience } from "../../Redux/ActionCreartors/ExperienceActionCreators";
+import {
+  deleteEducation,
+  getEducation,
+} from "../../Redux/ActionCreartors/EducationActionCreators";
 
-export default function AdminUpdateExperience() {
-  const { _id } = useParams(); // in case of real backend
-
-  const [data, setData] = useState({
-    jobTitle: "",
-    companyName: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    active: true,
-  });
-
-  const [error, setError] = useState({
-    jobTitle: "",
-    companyName: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  });
-
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
-
-  const ExperienceStateData = useSelector((state) => state.ExperienceStateData);
+export default function AdminEducation() {
+  const EducationStateData = useSelector((state) => state.EducationStateData);
   const dispatch = useDispatch();
 
-  // ✅ Handle Input Change
-  function getInputData(e) {
-    const { name, value } = e.target;
-
-    if (name !== "active") {
-      setError((old) => ({
-        ...old,
-        [name]:
-          typeof value === "string" && value.trim() !== ""
-            ? formValidator(e)
-            : "",
-      }));
+  // 🗑️ Delete Education
+  const deleteRecord = (_id) => {
+    if (window.confirm("Are you sure you want to delete this education record?")) {
+      dispatch(deleteEducation({ _id }));
+      getAPIData();
     }
+  };
 
-    setData((old) => ({
-      ...old,
-      [name]: name === "active" ? value === "1" : value,
-    }));
-  }
-
-  // ✅ Handle Submit
-  function postSubmit(e) {
-    e.preventDefault();
-    const errorItem = Object.values(error).find((x) => x !== "");
-
-    if (errorItem) {
-      setShow(true);
-    } else {
-      // ✅ Fixed duplicate check safely
-      const item = ExperienceStateData.find(
-        (x) =>
-          x._id !== _id &&
-          x.jobTitle &&
-          data.jobTitle &&
-          x.jobTitle.toLocaleLowerCase() === data.jobTitle.toLocaleLowerCase()
-      );
-
-      if (item) {
-        setShow(true);
-        setError((old) => ({
-          ...old,
-          jobTitle: "Experience with this Job Title already exists",
-        }));
-      } else {
-        dispatch(updateExperience({ ...data }));
-        navigate("/experience");
+  // 📊 Fetch & Initialize DataTable
+  const getAPIData = () => {
+    dispatch(getEducation());
+    const timer = setTimeout(() => {
+      if ($.fn.DataTable.isDataTable("#EducationTable")) {
+        $("#EducationTable").DataTable().destroy();
       }
-    }
-  }
+      $("#EducationTable").DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 8,
+        language: {
+          searchPlaceholder: "Search education...",
+          search: "",
+        },
+      });
+    }, 400);
+    return timer;
+  };
 
-  // ✅ Fetch and Populate Data
+  // 🔁 Fetch on Mount
   useEffect(() => {
-    dispatch(getExperience());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (ExperienceStateData.length > 0) {
-      const item = ExperienceStateData.find((x) => x._id === _id);
-      if (item) setData({ ...item });
-    }
-  }, [ExperienceStateData, _id]);
+    const timer = getAPIData();
+    return () => clearTimeout(timer);
+  }, [EducationStateData.length]);
 
   return (
-    <>
-      <div className="container">
-        <h5 className="text-center text-light bg-primary p-2">
-          Update Experience{" "}
-          <Link to="/experience">
-            <i className="fa fa-arrow-left text-light float-end pt-1"></i>
-          </Link>
+    <div className="admin-skill-container p-3">
+      {/* 🔹 Header Section */}
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-primary text-light rounded p-3 shadow-sm">
+        <h5 className="mb-2 mb-md-0 fw-semibold text-light">
+          <i className="fa fa-graduation-cap me-2"></i> Education Management
         </h5>
-
-        {/* Form */}
-        <div className="card mt-3 shadow-sm p-4">
-          <form onSubmit={postSubmit}>
-            {/* Job Title */}
-            <div className="mb-3">
-              <label>Job Title*</label>
-              <input
-                type="text"
-                name="jobTitle"
-                value={data.jobTitle}
-                onChange={getInputData}
-                placeholder="Enter Job Title"
-                className={`form-control border-3 ${
-                  show && error.jobTitle ? "border-danger" : "border-primary"
-                }`}
-              />
-              {show && error.jobTitle && (
-                <p className="text-danger text-capitalize">{error.jobTitle}</p>
-              )}
-            </div>
-
-            {/* Description */}
-            <div className="mb-3">
-              <label>Description*</label>
-              <textarea
-                name="description"
-                value={data.description}
-                onChange={getInputData}
-                className={`form-control border-3 ${
-                  show && error.description ? "border-danger" : "border-primary"
-                }`}
-                placeholder="Enter Description..."
-                rows={5}
-              ></textarea>
-              {show && error.description && (
-                <p className="text-danger text-capitalize">
-                  {error.description}
-                </p>
-              )}
-            </div>
-
-            {/* Start / End Dates */}
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label>Start Date*</label>
-                <input
-                  type="date"
-                  name="startDate"
-                  value={data.startDate}
-                  onChange={getInputData}
-                  className={`form-control border-3 ${
-                    show && error.startDate ? "border-danger" : "border-primary"
-                  }`}
-                />
-                {show && error.startDate && (
-                  <p className="text-danger text-capitalize">{error.startDate}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>End Date*</label>
-                <input
-                  type="text"
-                  name="endDate"
-                  value={data.endDate}
-                  onChange={getInputData}
-                  className={`form-control border-3 ${
-                    show && error.endDate ? "border-danger" : "border-primary"
-                  }`}
-                  placeholder="Enter End Date"
-                />
-                {show && error.endDate && (
-                  <p className="text-danger text-capitalize">{error.endDate}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Company + Active */}
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label>Company Name*</label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={data.companyName}
-                  onChange={getInputData}
-                  className={`form-control border-3 ${
-                    show && error.companyName
-                      ? "border-danger"
-                      : "border-primary"
-                  }`}
-                  placeholder="Enter Company Name"
-                />
-                {show && error.companyName && (
-                  <p className="text-danger text-capitalize">
-                    {error.companyName}
-                  </p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>Active*</label>
-                <select
-                  name="active"
-                  value={data.active ? "1" : "0"}
-                  onChange={getInputData}
-                  className="form-select border-3 border-primary"
-                >
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Submit */}
-            <div className="mb-3">
-              <button type="submit" className="btn btn-primary w-100 text-light">
-                Update
-              </button>
-            </div>
-          </form>
-        </div>
+        <Link
+          to="/Education/create"
+          className="btn btn-light text-primary fw-semibold shadow-sm"
+        >
+          <i className="fa fa-plus me-1"></i> Add Education
+        </Link>
       </div>
-    </>
-  );
-=======
-import React, { useEffect, useState } from 'react'
 
-import { Link } from 'react-router-dom'
+      {/* 🔹 Table Section */}
+      <div className="table-responsive mt-4">
+        <table
+          id="EducationTable"
+          className="table table-striped table-bordered align-middle shadow-sm responsive-table"
+        >
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Degree</th>
+              <th>Institute</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th className="text-center">Edit</th>
+              <th className="text-center">Delete</th>
+            </tr>
+          </thead>
 
-import { useDispatch, useSelector } from 'react-redux';
+          <tbody>
+            {EducationStateData.length > 0 ? (
+              EducationStateData.map((item, i) => (
+                <tr key={item._id || i}>
+                  {/* ID */}
+                  <td data-label="ID" className="text-muted small">
+                    {item._id}
+                  </td>
 
-import $ from 'jquery';                                         // Import jQuery
-import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
-import 'datatables.net';
+                  {/* Degree */}
+                  <td data-label="Degree" className="fw-semibold text-primary">
+                    {item.degreeName}
+                  </td>
 
-import { deleteExperience, getExperience } from "../../Redux/ActionCreartors/ExperienceActionCreators"
-export default function AdminExperience() {
-    let ExperienceStateData = useSelector(state => state.ExperienceStateData)
-    let dispatch = useDispatch()
+                  {/* Institute */}
+                  <td data-label="Institute">{item.instituteName}</td>
 
-    // function deleteRecord(id) {
-    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
-    //         dispatch(deleteExperience({ id: id }))
-    //         getAPIData()
-    //     }
-    // }
+                  {/* Dates */}
+                  <td data-label="Start" className="text-center">
+                    {item.startDate}
+                  </td>
+                  <td data-label="End" className="text-center">
+                    {item.endDate}
+                  </td>
 
-    function deleteRecord(_id) {
-        if (window.confirm("Are You Sure to Delete that Item : ")) {
-            dispatch(deleteExperience({ _id: _id }))
-            getAPIData()
+                  {/* Description */}
+                  <td
+                    data-label="Description"
+                    className="text-truncate description-cell"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    {item.description || "—"}
+                  </td>
+
+                  {/* Status */}
+                  <td data-label="Status">
+                    <span
+                      className={`badge px-3 py-2 ${
+                        item.active ? "bg-success" : "bg-danger"
+                      }`}
+                    >
+                      {item.active ? "Active" : "Inactive"}
+                    </span>
+                  </td>
+
+                  {/* ✏️ Edit */}
+                  <td data-label="Edit" className="text-center">
+                    <Link
+                      to={`/Education/update/${item._id}`}
+                      className="table-action-btn edit"
+                      title="Edit Education"
+                    >
+                      <i className="fa fa-edit"></i>
+                    </Link>
+                  </td>
+
+                  {/* 🗑️ Delete */}
+                  <td data-label="Delete" className="text-center">
+                    <button
+                      className="table-action-btn delete"
+                      title="Delete Education"
+                      onClick={() => deleteRecord(item._id)}
+                    >
+                      <i className="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="9" className="text-center py-4 text-muted">
+                  <i className="fa fa-spinner fa-spin me-2"></i> Loading education records...
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* ✅ Scoped CSS */}
+      <style>{`
+        .table th, .table td {
+          vertical-align: middle;
         }
-    }
-    function getAPIData() {
-        dispatch(getExperience())
-        let time = setTimeout(() => {
-            $('#DataTable').DataTable()
-        }, 500)
-        return time
-    }
-    useEffect(() => {
-        let time = getAPIData()
-        return () => clearTimeout(time)
-    }, [ExperienceStateData.length])
-
-
-    return (
-        <>
-            <div className="container-fluid">
-                {/* Header */}
-                <h5 className="text-center text-light bg-primary p-3">Experience <Link to="/Experience/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
-                {/* Table */}
-                <div className="table-responsive mt-3">
-                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
-                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
-                            <tr>
-                                <th>Id</th>
-
-                                <th>Job Title</th>
-                                <th>Company Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Description</th>
-                                <th>Active</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                ExperienceStateData.map((item) => {
-                                    return <tr key={item._id}>
-                                        {/* return <tr key={item._id}> */}
-                                        <td>{item._id}</td>
-                                        {/* <td>{item.id}</td> */}
-                                        <td>{item.jobTitle}</td>
-                                        <td>{item.companyName}</td>
-                                        <td>{item.startDate}</td>
-                                        <td>{item.endDate}</td>
-                                        <td>{item.description}</td>
-                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
-                                        <td><Link to={`/Experience/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    );
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
+        .table-action-btn {
+          border: none;
+          background: none;
+          font-size: 18px;
+          cursor: pointer;
+          color: #007bff;
+          transition: all 0.2s ease-in-out;
+        }
+        .table-action-btn.delete {
+          color: #dc3545;
+        }
+        .table-action-btn:hover {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+        .description-cell {
+          max-width: 280px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        @media (max-width: 768px) {
+          td[data-label="Description"] {
+            white-space: normal !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
 }

@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
 import "datatables.net-dt/css/dataTables.dataTables.min.css";
 import "datatables.net";
+
 import {
   deleteCertificate,
   getCertificate,
@@ -16,7 +16,7 @@ export default function AdminCertificate() {
   );
   const dispatch = useDispatch();
 
-  // ✅ Delete Certificate
+  // 🗑 Delete Certificate
   const deleteRecord = (_id) => {
     if (window.confirm("Are you sure you want to delete this certificate?")) {
       dispatch(deleteCertificate({ _id }));
@@ -24,7 +24,7 @@ export default function AdminCertificate() {
     }
   };
 
-  // ✅ Fetch & Initialize DataTable
+  // 📊 Initialize DataTable
   const getAPIData = () => {
     dispatch(getCertificate());
     const timer = setTimeout(() => {
@@ -34,17 +34,16 @@ export default function AdminCertificate() {
       $("#CertificateTable").DataTable({
         responsive: true,
         autoWidth: false,
-        pageLength: 8,
         language: {
           searchPlaceholder: "Search certificates...",
           search: "",
         },
+        pageLength: 8,
       });
     }, 400);
     return timer;
   };
 
-  // ✅ Fetch on Mount
   useEffect(() => {
     const timer = getAPIData();
     return () => clearTimeout(timer);
@@ -52,7 +51,7 @@ export default function AdminCertificate() {
 
   return (
     <div className="admin-skill-container p-3">
-      {/* Header */}
+      {/* 🔹 Header */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center bg-primary text-light rounded p-3 shadow-sm">
         <h5 className="mb-2 mb-md-0 fw-semibold text-light">
           <i className="fa fa-certificate me-2"></i> Certificate Management
@@ -65,7 +64,7 @@ export default function AdminCertificate() {
         </Link>
       </div>
 
-      {/* Table */}
+      {/* 🔹 Table */}
       <div className="table-responsive mt-4">
         <table
           id="CertificateTable"
@@ -82,6 +81,7 @@ export default function AdminCertificate() {
               <th className="text-center">Delete</th>
             </tr>
           </thead>
+
           <tbody>
             {CertificateStateData.length > 0 ? (
               CertificateStateData.map((item, i) => (
@@ -138,8 +138,6 @@ export default function AdminCertificate() {
                       to={`/certificate/update/${item._id}`}
                       className="table-action-btn edit"
                       title="Edit Certificate"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
                     >
                       <i className="fa fa-edit"></i>
                     </Link>
@@ -151,8 +149,6 @@ export default function AdminCertificate() {
                       className="table-action-btn delete"
                       title="Delete Certificate"
                       onClick={() => deleteRecord(item._id)}
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
                     >
                       <i className="fa fa-trash"></i>
                     </button>
@@ -172,94 +168,4 @@ export default function AdminCertificate() {
       </div>
     </div>
   );
-=======
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux';
-
-import $ from 'jquery';                                         // Import jQuery
-import 'datatables.net-dt/css/dataTables.dataTables.min.css';   // Import DataTables styles
-import 'datatables.net';
-
-import { deleteCertificate, getCertificate } from "../../Redux/ActionCreartors/CertificateActionCreators"
-export default function AdminCertificate() {
-    let CertificateStateData = useSelector(state => state.CertificateStateData)
-    let dispatch = useDispatch()
-
-    // function deleteRecord(id) {
-    //     if (window.confirm("Are You Sure to Delete that Item : ")) {
-    //         dispatch(deleteCertificate({ id: id }))
-    //         getAPIData()
-    //     }
-    // }
-    function deleteRecord(_id) {
-        if (window.confirm("Are You Sure to Delete that Item : ")) {
-            dispatch(deleteCertificate({ _id: _id }))
-            getAPIData()
-        }
-    }
-    function getAPIData() {
-        dispatch(getCertificate())
-        let time = setTimeout(() => {
-            $('#DataTable').DataTable()
-        }, 500)
-        return time
-    }
-    useEffect(() => {
-        let time = getAPIData()
-        return () => clearTimeout(time)
-    }, [CertificateStateData.length])
-
-
-    return (
-        <>
-            <div className="container-fluid">
-                {/* Header */}
-                <h5 className="text-center text-light bg-primary p-3">Certificate <Link to="/Certificate/create"><i className="fa fa-plus text-light float-end pt-1"></i></Link></h5>
-                {/* Table */}
-                <div className="table-responsive mt-3">
-                    <table id='DataTable' className="table table-striped table-hover table-bordered text-center">
-                        <thead className="text-light" style={{ backgroundColor: "#1F2A40" }}>
-                            <tr>
-                                <th>Id</th>
-
-                                <th>Name</th>
-                                <th>Pic</th>
-                                <th>Issued By</th>
-                                <th>Active</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                CertificateStateData.map((item) => {
-                                    return <tr key={item._id}>
-                                        {/* return <tr key={item._id}> */}
-                                        {/* <td>{item.id}</td> */}
-                                        <td>{item._id}</td>
-                                        <td>{item.name}</td>
-                                        <td>
-                                            <Link to={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} target='_blank' rel='noreferrer'>
-                                                <img src={`${process.env.REACT_APP_BACKEND_SERVER}/${item.pic}`} height={50} width={80} alt="" />
-                                            </Link>
-                                        </td>
-                                        
-                                        <td>{item.issuedBy}</td>
-                                        <td className={`${item.active ? 'text-success' : 'text-danger'}`}>{item.active ? "Yes" : "No"}</td>
-                                        {/* <td><Link to={`/admin/Certificate/update/${item.id}`} className='btn btn-primary'><i className='fa fa-edit fs-4'></i></Link></td>
-                                                <td>{localStorage.getItem("role")==="Super Admin"?<button className='btn btn-danger' onClick={() => deleteRecord(item.id)}><i className='fa fa-trash fs-4'></i></button>:null}</td> */}
-                                        <td><Link to={`/Certificate/update/${item._id}`} className='btn btn-primary text-light'><i className='fa fa-edit fs-4'></i></Link></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteRecord(item._id)}><i className='fa fa-trash fs-4'></i></button></td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    );
->>>>>>> 7c8c6d34840fb83ec2a1bf99a7bf8b648771c9aa
 }
